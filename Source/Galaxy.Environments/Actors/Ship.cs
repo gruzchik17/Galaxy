@@ -23,8 +23,8 @@ namespace Galaxy.Environments.Actors
 
     #region Private fields
 
-    private bool m_flying;
-    private Stopwatch m_flyTimer;
+    protected bool m_flying;
+    protected Stopwatch m_flyTimer;
 
     #endregion
 

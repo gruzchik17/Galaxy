@@ -14,6 +14,14 @@ namespace Galaxy.Environments.Actors
 {
   public class Ship1 : Ship
   {
-
+      public override void Load()
+      {
+          Load(@"Assets\ship1.png");
+          if (m_flyTimer == null)
+          {
+              m_flyTimer = new Stopwatch();
+              m_flyTimer.Start();
+          }
+      }
   }
 }

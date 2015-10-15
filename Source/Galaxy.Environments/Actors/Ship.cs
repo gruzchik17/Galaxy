@@ -83,28 +83,9 @@ namespace Galaxy.Environments.Actors
 
     private void h_changePosition()
     {
-      Point playerPosition = Info.GetPlayerPosition();
+        int speed = 5;
 
-      Vector distance = new Vector(playerPosition.X - Position.X, playerPosition.Y - Position.Y);
-      double coef = distance.X / MaxSpeed;
-
-      Vector movement = Vector.Divide(distance, coef);
-
-      Size levelSize = Info.GetLevelSize();
-
-      if(movement.X > levelSize.Width)
-        movement = new Vector(levelSize.Width, movement.Y);
-
-      if(movement.X < 0 || double.IsNaN(movement.X))
-        movement = new Vector(0, movement.Y);
-
-      if(movement.Y > levelSize.Height)
-        movement = new Vector(movement.X, levelSize.Height);
-
-      if(movement.Y < 0 ||  double.IsNaN(movement.Y))
-        movement = new Vector(movement.X, 0);
-
-      Position = new Point((int) (Position.X + movement.X), (int) (Position.Y + movement.Y));
+        Position = new Point(Position.X + speed, Position.Y);
     }
 
     #endregion

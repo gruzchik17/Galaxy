@@ -21,8 +21,8 @@ namespace Galaxy.Environments.Actors
     public PlayerShip(ILevelInfo info)
       : base(info)
     {
-      Width = 22;
-      Height = 26;
+      Width = 20;
+      Height = 20;
       ActorType = ActorType.Player;
     }
 

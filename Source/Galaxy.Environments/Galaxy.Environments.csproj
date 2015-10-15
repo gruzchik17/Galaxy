@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\Player.cs" />
+    <Compile Include="Actors\EnemyBullet.cs" />
     <Compile Include="Actors\Ship.cs" />
     <Compile Include="Actors\Bullet.cs" />
     <Compile Include="Actors\Ship2.cs" />
@@ -70,7 +71,7 @@
     <Content Include="Assets\ship.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\ship1.jpg">
+    <Content Include="Assets\ship1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

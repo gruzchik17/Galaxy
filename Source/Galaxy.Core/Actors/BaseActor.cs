@@ -50,7 +50,6 @@ namespace Galaxy.Core.Actors
       IsAlive = true;
       CanDrop = false;
     }
-
     #endregion
 
     #region Public methods

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaxy.Core", "Galaxy.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaxy.Environments", "Galaxy.Environments\Galaxy.Environments.csproj", "{3296488F-7AA8-4A04-B452-3336089A8D7D}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject1", "ModelingProject1\ModelingProject1.modelproj", "{E6FF09B5-1E5D-47D2-B720-B290DE707166}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3296488F-7AA8-4A04-B452-3336089A8D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3296488F-7AA8-4A04-B452-3336089A8D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3296488F-7AA8-4A04-B452-3336089A8D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6FF09B5-1E5D-47D2-B720-B290DE707166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6FF09B5-1E5D-47D2-B720-B290DE707166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6FF09B5-1E5D-47D2-B720-B290DE707166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6FF09B5-1E5D-47D2-B720-B290DE707166}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

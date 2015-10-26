@@ -44,7 +44,6 @@ namespace Galaxy.Core.Environment
     protected BaseLevel()
     {
       Actors = new List<BaseActor>();
-
       Enemy = new List<BaseActor>();
       Size = new Size(DefaultWidth, DefaultHeight);
     }
@@ -63,7 +62,7 @@ namespace Galaxy.Core.Environment
       }
     }
 
-    public void Load()
+    public virtual void Load()
     {
       h_load();
 

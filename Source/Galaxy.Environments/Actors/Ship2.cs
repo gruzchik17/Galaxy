@@ -29,10 +29,5 @@ namespace Galaxy.Environments.Actors
               m_flyTimer.Start();
           }
       }
-      public override void Update()
-      {
-          base.Update();
-          EnemyBullet EnemyBullet = new EnemyBullet(Info);
-      }
   }
 }

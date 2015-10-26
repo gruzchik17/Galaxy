@@ -11,134 +11,139 @@ using Galaxy.Core.Environment;
 
 namespace Galaxy.Core.Engine
 {
-  public class Engine
-  {
-    #region Private fields
-
-    private readonly PictureBox m_canvas;
-    private BaseLevel m_level;
-
-    #endregion
-
-    #region Constructors
-
-    public Engine(PictureBox canvas, Type firstLevel)
+    public class Engine
     {
-      m_canvas = canvas;
-      m_targetFps = 60;
+        #region Private fields
 
-      StartScreen.LevelOne = firstLevel;
-    }
+        private readonly PictureBox m_canvas;
+        private BaseLevel m_level;
 
-    #endregion
+        #endregion
 
-    #region Public methods
+        #region Constructors
 
-    public void Start()
-    {
-      if (IsRunning)
-      {
-        return;
-      }
-
-      Level = new StartScreen();
-
-      IsRunning = true;
-      h_runningThread = new Thread(h_threadRun);
-      h_runningThread.Start();
-    }
-
-    public void Stop()
-    {
-      IsRunning = false;
-    }
-
-    #endregion
-
-    #region Private methods
-
-    private void h_threadRun()
-    {
-      var framecounter = new Stopwatch();
-      var tickcounter = new Stopwatch();
-
-      while (IsRunning)
-      {
-        framecounter.Start();
-        tickcounter.Start();
-
-        h_tick();
-
-        tickcounter.Stop();
-
-        var targettime = 1f / m_targetFps * 1000f;
-        var actualtime = tickcounter.ElapsedMilliseconds;
-        var sleep = targettime - actualtime;
-        if (sleep > 0)
+        public Engine(PictureBox canvas, Type firstLevel)
         {
-          Thread.Sleep((int) sleep);
+            m_canvas = canvas;
+            m_targetFps = 60;
+
+            StartScreen.LevelOne = firstLevel;
         }
 
-        tickcounter.Reset();
-        framecounter.Stop();
+        #endregion
 
-        if (framecounter.ElapsedMilliseconds < 1000)
+        #region Public methods
+
+        public void Start()
         {
-          continue;
+            if (IsRunning)
+            {
+                return;
+            }
+
+            Level = new StartScreen();
+
+            IsRunning = true;
+            h_runningThread = new Thread(h_threadRun);
+            h_runningThread.Start();
         }
 
-        framecounter.Reset();
-      }
+        public void Stop()
+        {
+            IsRunning = false;
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void h_threadRun()
+        {
+            var framecounter = new Stopwatch();
+            var tickcounter = new Stopwatch();
+
+            while (IsRunning)
+            {
+                framecounter.Start();
+                tickcounter.Start();
+
+                h_tick();
+
+                tickcounter.Stop();
+
+                var targettime = 1f / m_targetFps * 1000f;
+                var actualtime = tickcounter.ElapsedMilliseconds;
+                var sleep = targettime - actualtime;
+                if (sleep > 0)
+                {
+                    Thread.Sleep((int)sleep);
+                }
+
+                tickcounter.Reset();
+                framecounter.Stop();
+
+                if (framecounter.ElapsedMilliseconds < 1000)
+                {
+                    continue;
+                }
+
+                framecounter.Reset();
+            }
+        }
+
+        private void h_tick()
+        {
+            var frame = new Bitmap(Level.Size.Width, Level.Size.Height);
+
+            using (var graphics = Graphics.FromImage(frame))
+            {
+                Level.Update();
+                Level.Draw(graphics);
+                graphics.Flush();
+            }
+
+            if (Level.Success)
+                Level = Level.NextLevel();
+
+            if (Level.Failed)
+            {
+                Level = new FailScreen();
+            }
+
+
+            m_canvas.Invoke(new Action(() =>
+                {
+                    if (m_canvas.Image != null)
+                    {
+                        m_canvas.Image.Dispose();
+                    }
+                    m_canvas.Image = frame;
+                }
+                ));
+        }
+
+        #endregion
+
+        #region Props
+
+        private readonly int m_targetFps;
+
+        public bool IsRunning { get; private set; }
+
+        private Thread h_runningThread { get; set; }
+
+        public BaseLevel Level
+        {
+            get { return m_level; }
+            set
+            {
+                m_level = value;
+                m_level.Load();
+                m_canvas.Width = m_level.Size.Width;
+                m_canvas.Height = m_level.Size.Height;
+            }
+        }
+
+        #endregion
     }
-
-    private void h_tick()
-    {
-      var frame = new Bitmap(Level.Size.Width, Level.Size.Height);
-
-      using (var graphics = Graphics.FromImage(frame))
-      {
-        Level.Update();
-        Level.Draw(graphics);
-        graphics.Flush();
-      }
-
-      if (Level.Success)
-        Level = Level.NextLevel();
-
-      if (Level.Failed)
-      {
-        Level = new FailScreen();
-      }
-
-      if (m_canvas.Image != null)
-      {
-        m_canvas.Image.Dispose();
-      }
-      m_canvas.Image = frame;
-    }
-
-    #endregion
-
-    #region Props
-
-    private readonly int m_targetFps;
-
-    public bool IsRunning { get; private set; }
-
-    private Thread h_runningThread { get; set; }
-
-    public BaseLevel Level
-    {
-      get { return m_level; }
-      set
-      {
-        m_level = value;
-        m_level.Load();
-        m_canvas.Width = m_level.Size.Width;
-        m_canvas.Height = m_level.Size.Height;
-      }
-    }
-
-    #endregion
-  }
 }

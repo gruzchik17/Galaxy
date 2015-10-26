@@ -38,6 +38,13 @@ namespace Galaxy.Environments.Actors
         public override void Update()
         {
             Position = new Point(Position.X, Position.Y + Speed);
+
+            var LevelSize = Info.GetLevelSize();
+
+            if(Position.Y > LevelSize.Height)
+            {
+                CanDrop = true;
+            }
         }
 
         #endregion

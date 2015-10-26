@@ -3,32 +3,34 @@
 using System.Windows.Forms;
 using Galaxy.Core.Engine;
 using Galaxy.Environments;
+using System.Threading;
+using System;
 
 #endregion
 
 namespace Galaxy
 {
-  public partial class MainForm : Form
-  {
-    #region Private fields
-
-    private readonly Engine m_engine;
-
-    #endregion
-
-    #region Constructors
-
-    public MainForm()
+    public partial class MainForm : Form
     {
-      InitializeComponent();
+        #region Private fields
 
-      m_engine = new Engine(canvas, typeof (LevelOne));
+        private readonly Engine m_engine;
 
-      FormClosing += (o, e) => m_engine.Stop();
+        #endregion
 
-      m_engine.Start();
+        #region Constructors
+
+        public MainForm()
+        {
+            InitializeComponent();
+
+            m_engine = new Engine(canvas, typeof(LevelOne));
+
+            FormClosing += (o, e) => m_engine.Stop();
+
+            m_engine.Start();
+        }
+
+        #endregion
     }
-
-    #endregion
-  }
 }

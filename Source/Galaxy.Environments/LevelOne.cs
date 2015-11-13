@@ -88,7 +88,7 @@ namespace Galaxy.Environments
 
         public void BulletShot()
         {
-            if (BullShot.ElapsedMilliseconds < 500 )
+            if (BullShot.ElapsedMilliseconds < 1000 )
                 return;
 
             var enbul = new EnemyBullet(this);
@@ -105,7 +105,7 @@ namespace Galaxy.Environments
             enbul.Load();
 
             Actors.Add(enbul);
-            SoundPlayer lazershot2 = new SoundPlayer(@"D:\Учеба\5 семестр\Долгов\Galaxy\Source\Galaxy.Environments\Media\Lazer2.wav");
+            SoundPlayer lazershot2 = new SoundPlayer(@"Media\Lazer2.wav");
             lazershot2.Play();
 
             BullShot.Restart();
@@ -131,10 +131,9 @@ namespace Galaxy.Environments
 
             bullet.Load();
             Actors.Add(bullet);
-            SoundPlayer lazershot = new SoundPlayer(@"D:\Учеба\5 семестр\Долгов\Galaxy\Source\Galaxy.Environments\Media\Lazer1.wav");
+            SoundPlayer lazershot = new SoundPlayer(@"Media\Lazer1.wav");
             lazershot.Play();
         }
-
         public override BaseLevel NextLevel()
         {
             return new StartScreen();

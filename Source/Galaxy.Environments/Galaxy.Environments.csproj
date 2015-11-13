@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Actors\Player.cs" />
     <Compile Include="Actors\EnemyBullet.cs" />
+    <Compile Include="Actors\Prepyt.cs" />
+    <Compile Include="Actors\Prepyt2.cs" />
     <Compile Include="Actors\Ship.cs" />
     <Compile Include="Actors\Bullet.cs" />
     <Compile Include="Actors\Ship2.cs" />
@@ -68,12 +70,19 @@
     <Content Include="Assets\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Prepyt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Prepyt2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\ship.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\ship1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Media\Lazer.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

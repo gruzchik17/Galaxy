@@ -51,6 +51,11 @@ namespace Galaxy.Core.Engine
         public void Stop()
         {
             IsRunning = false;
+            while (h_runningThread.IsAlive)
+            {
+                Thread.Sleep(100);
+                Application.DoEvents();
+            }
         }
 
         #endregion

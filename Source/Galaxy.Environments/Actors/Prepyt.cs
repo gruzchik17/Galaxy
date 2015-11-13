@@ -12,9 +12,9 @@ using Size = System.Drawing.Size;
 
 namespace Galaxy.Environments.Actors
 {
-  public class Ship : DethAnimationActor
-  {
-    #region Constant
+    public class Prepyt : DethAnimationActor
+    {
+       #region Constant
 
     private const int MaxSpeed = 1;
     private const long StartFlyMs = 2000;
@@ -30,9 +30,9 @@ namespace Galaxy.Environments.Actors
 
     #region Constructors
 
-    public Ship(ILevelInfo info):base(info)
+    public Prepyt(ILevelInfo info):base(info)
     {
-      Width = 30;
+      Width = 50;
       Height = 30;
       ActorType = ActorType.Enemy;
     }
@@ -69,7 +69,7 @@ namespace Galaxy.Environments.Actors
 
     public override void Load()
     {
-      Load(@"Assets\ship.png");
+      Load(@"Assets\Prepyt.png");
       if (m_flyTimer == null)
       {
         m_flyTimer = new Stopwatch();
@@ -84,11 +84,11 @@ namespace Galaxy.Environments.Actors
     
     private void h_changePosition()
     {
-        int speed = 10;
+        int speed = 0;
 
         Position = new Point(Position.X + speed, Position.Y);
     }
 
     #endregion
-  }
+    }
 }

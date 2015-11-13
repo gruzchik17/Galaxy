@@ -74,6 +74,8 @@ namespace Galaxy.Core.Actors
       Load(@"Assets\deth.png");
     }
 
+    
+
     #endregion
   }
 }

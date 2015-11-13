@@ -40,5 +40,17 @@ namespace Galaxy.Environments.Actors
     }
 
     #endregion
+    public override bool IsAlive
+    {
+        get
+        {
+            return base.IsAlive;
+        }
+        set
+        {
+            base.IsAlive = value;
+            CanDrop = !value;
+        }
+    }
   }
 }

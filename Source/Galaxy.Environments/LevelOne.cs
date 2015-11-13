@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using Galaxy.Core.Actors;
 using Galaxy.Core.Collision;
 using Galaxy.Core.Environment;
@@ -16,13 +17,13 @@ namespace Galaxy.Environments
 {
     /// <summary>
     ///   The level class for Open Mario.  This will be the first level that the player interacts with.
-    /// </summary>
+    /// </summary>   
     public class LevelOne : BaseLevel
     {
         private int m_frameCount;
 
         #region Constructors
-
+        
         /// <summary>
         ///   Initializes a new instance of the <see cref="LevelOne" /> class.
         /// </summary>
@@ -41,15 +42,36 @@ namespace Galaxy.Environments
 
                 var ship1 = new Ship1(this);
                 int positionY1 = ship.Height + 10;
-                int positionX1 = 100 + i * (ship1.Width + 50);
+                int positionX1 = 150 + i * (ship1.Width + 50);
                 ship1.Position = new Point(positionX1, positionY1);
+
+                var ship3 = new Ship(this);
+                int positionY2 = ship3.Height + 90;
+                int positionX2 = 150 + i * (ship3.Width + 50);
+                ship3.Position = new Point(positionX2, positionY2);
+
+                var prepyt2 = new Prepyt2(this);
+                int positionY4 = prepyt2.Height + 170;
+                int positionX4 = i * (prepyt2.Width + 93);
+                prepyt2.Position = new Point(positionX4, positionY4);
 
 
                 Actors.Add(ship);
                 Actors.Add(ship1);
-
-
+                Actors.Add(ship3);
+                Actors.Add(prepyt2);
             }
+            // Blocks
+            for (int i = 0; i < 11; i++)
+            {
+                var prepyt = new Prepyt(this);
+                int positionY3 = prepyt.Height + 130;
+                int positionX3 = 50 + i * (prepyt.Width);
+                prepyt.Position = new Point(positionX3, positionY3);
+
+                Actors.Add(prepyt);
+            }
+
 
             // Player
             Player = new PlayerShip(this);
@@ -57,20 +79,22 @@ namespace Galaxy.Environments
             int playerPositionY = Size.Height - Player.Height - 50;
             Player.Position = new Point(playerPositionX, playerPositionY);
             Actors.Add(Player);
-
+            
         }
 
         #endregion
 
         #region Overrides
 
-        private void BulletShot()
+        public void BulletShot()
         {
-            if (BullShot.ElapsedMilliseconds < 2000)
+            if (BullShot.ElapsedMilliseconds < 500 )
                 return;
 
             var enbul = new EnemyBullet(this);
             var enemyList = Actors.Where((actor) => actor is Ship || actor is Ship1).ToList();
+            if (enemyList.Count > 0)
+            {
 
             Random rnd = new Random();
             int qq = rnd.Next(enemyList.Count);
@@ -81,8 +105,11 @@ namespace Galaxy.Environments
             enbul.Load();
 
             Actors.Add(enbul);
+            SoundPlayer lazershot2 = new SoundPlayer(@"D:\Учеба\5 семестр\Долгов\Galaxy\Source\Galaxy.Environments\Media\Lazer2.wav");
+            lazershot2.Play();
 
             BullShot.Restart();
+            }
         }
         private void UpWallpapers()
         {
@@ -104,11 +131,14 @@ namespace Galaxy.Environments
 
             bullet.Load();
             Actors.Add(bullet);
+            SoundPlayer lazershot = new SoundPlayer(@"D:\Учеба\5 семестр\Долгов\Galaxy\Source\Galaxy.Environments\Media\Lazer1.wav");
+            lazershot.Play();
         }
 
         public override BaseLevel NextLevel()
         {
             return new StartScreen();
+
         }
         
         private Stopwatch BullShot = new Stopwatch();
@@ -125,7 +155,7 @@ namespace Galaxy.Environments
 
             foreach (BaseActor killedActor in killedActors)
             {
-                if (killedActor.IsAlive)
+                if (killedActor.IsAlive) 
                     killedActor.IsAlive = false;
             }
 
@@ -141,8 +171,8 @@ namespace Galaxy.Environments
             if (Player.CanDrop)
                 Failed = true;
 
-            //has no enemy
-            if (Actors.All(actor => actor.ActorType != ActorType.Enemy))
+            //has no enemy Actors.All(actor => actor.ActorType != ActorType.Enemy)
+            if (Actors.Where((actor) => actor is Ship || actor is Ship1).ToList().Count == 0)
                 Success = true;
         }
 
